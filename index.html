@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JWT Test</title>
+</head>
+<body>
+    <h1 id="greeting"></h1>
+    <script>
+        // Extract the token from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        if (token) {
+            // Decode the token's payload
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            const firstName = payload.firstName;
+            const lastName = payload.lastName;
+
+            // Update the webpage with a greeting
+            document.getElementById('greeting').textContent = `Hello, ${firstName} ${lastName}! Welcome to the platform.`;
+        } else {
+            document.getElementById('greeting').textContent = "No token found!";
+        }
+    </script>
+</body>
+</html>
